@@ -6,7 +6,9 @@ bin-release/
 
 # Other files and folders
 .settings/
-
+*txt
+сечения.sch
+траектория утяжеления.ut2
 # Executables
 *.swf
 *.air
