@@ -40,7 +40,7 @@ print("МДП по 1 критерию", round(mdp1,2))
 print("---- проверочный критерий по U в нормальном режиме.--------------- ")
 # проверочный критерий по U в нормальном режиме.
 rastr.Load(1, regime, shablon_rgm) 
-function_mdp.crit_U_norm(rastr, 1.15)
+function_mdp.criterion_U_norm(rastr, 1.15)
 mdpU = abs(rastr.Tables('sechen').Cols('psech').Z(0)) - nereg
 print("Проверочный по U-", round(mdpU,2))
 
@@ -48,9 +48,7 @@ print("Проверочный по U-", round(mdpU,2))
 print("----------------------- 2 критерий по P в ПАР.-------------------- ")
 rastr.Load(1, regime, shablon_rgm) 
 faults = pd.read_json(r'C:\Users\Кристина\Desktop\Нирс 1 семестр\3 семестр\Нирс\MDP_Ismeykina_\faults.json')
-faults = faults.T
-faults.index=np.arange(faults.shape[0])
-doavar_flow = function_mdp.crit_P_par(rastr, faults, shablon_rgm)
+doavar_flow = function_mdp.criterion_P_par(rastr, faults, shablon_rgm)
 print("Доаварийный переток в КС-", doavar_flow)
 mdp2 = min(doavar_flow) - nereg
 print("МДП по 2 критерию-", mdp2 )
@@ -58,7 +56,7 @@ print("МДП по 2 критерию-", mdp2 )
 # 3 критерий по U в ПАР
 print(" -----------------------3 критерий по U в ПАР.--------------------- ")
 rastr.Load(1, regime, shablon_rgm)
-doavar_flow2 = function_mdp.crit_U_par(rastr, faults, shablon_rgm)
+doavar_flow2 = function_mdp.criterion_U_par(rastr, faults, shablon_rgm)
 mdp3 = min(doavar_flow2) - nereg
 print("Доаварийный переток U-", doavar_flow2)
 print("МДП по 3 критерию -", mdp3 )
@@ -66,7 +64,7 @@ print("МДП по 3 критерию -", mdp3 )
 # проверочный критерий по I в нормальном режиме
 print(" ------------ проверочный критерий по I в нормальном режиме --------")
 rastr.Load(1, regime, shablon_rgm)
-function_mdp.crit_I_norm(rastr,'i_dop_r', shablon_rgm)
+function_mdp.criterion_I_norm(rastr,'i_dop_r', shablon_rgm)
 mdpI = abs(rastr.Tables('sechen').Cols('psech').Z(0)) - nereg
 print("Проверочный по I-", round(mdpI,2))
 
@@ -74,7 +72,7 @@ print("Проверочный по I-", round(mdpI,2))
 print(" ----------------------- 4 критерий по I в ПАР.-------------------- ")
 rastr.Load(1, regime, shablon_rgm)
 
-doavar_flow3 = function_mdp.crit_I_par(rastr, faults, shablon_rgm)
+doavar_flow3 = function_mdp.criterion_I_par(rastr, faults, shablon_rgm)
 mdp4 = min(doavar_flow3) - nereg
 print("Доаварийный переток I-", doavar_flow3)
 print("МДП по 4 критерию -", mdp4)
